@@ -65,13 +65,13 @@ func avg(_ a1: [Int]) -> Int {
 }
 
 
-//              Points
+//              Points (tuple)
 // checks if the tuple has only two elements of integers
-func tupleCheck(_ t: Any?) -> Bool {
+func tupleCheck(_ t: Any) -> Bool {
     return t is (Int, Int)
 }
 
-func addPoints(_ p1: (Any?), _ p2: (Any?)) -> (Int, Int) {
+func addPoints(_ p1: (Any), _ p2: (Any)) -> (Int, Int) {
     if (tupleCheck(p1) && tupleCheck(p2)) {
         let np1 = p1 as! (Int, Int)
         let np2 = p2 as! (Int, Int)
@@ -80,7 +80,7 @@ func addPoints(_ p1: (Any?), _ p2: (Any?)) -> (Int, Int) {
     return (0, 0)
 }
 
-func subPoints(_ p1: (Any?), _ p2: (Any?)) -> (Int, Int) {
+func subPoints(_ p1: (Any), _ p2: (Any)) -> (Int, Int) {
     if (tupleCheck(p1) && tupleCheck(p2)) {
         let np1 = p1 as! (Int, Int)
         let np2 = p2 as! (Int, Int)
@@ -88,3 +88,79 @@ func subPoints(_ p1: (Any?), _ p2: (Any?)) -> (Int, Int) {
     }
     return (0, 0)
 }
+
+//              Points (dictionary)
+// checks the type of dictionary
+// return 0 if the number is integer, 1 if double, and -1 otherwise
+func dictCheck(_ t: [String: Any]) -> Int {
+    let intTest = t is [String: Int]
+    let doubleTest = t is [String: Double]
+    if (intTest) {
+        return 0
+    } else if (doubleTest) {
+        return 1
+    } else {
+        return -1
+    }
+}
+
+// checks if dictionaries have both "x" and "y"
+func validPtTest(_ d1: [String: Any]?, _ d2: [String: Any]?) -> Bool{
+    if (d1 == nil || d2 == nil) {
+        if (d1!["x"] == nil || d1!["y"] == nil || d2!["x"] == nil || d2!["y"] == nil) {
+            return false
+        }
+    }
+    return true
+}
+
+func addPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any]? {
+    let cases = dictCheck(d1)
+    if (dictCheck(d1) == dictCheck(d2) && validPtTest(d1, d2)) {
+        switch cases {
+        case 0:
+            var result: [String: Int] = [:]
+            let nd1 = d1 as! [String: Int]
+            let nd2 = d2 as! [String: Int]
+            result["x"] = nd1["x"]! + nd2["x"]!
+            result["y"] = nd1["y"]! + nd2["y"]!
+            return result
+        case 1:
+            var result: [String: Double] = [:]
+            let nd1 = d1 as! [String: Double]
+            let nd2 = d2 as! [String: Double]
+            result["x"] = nd1["x"]! + nd2["x"]!
+            result["y"] = nd1["y"]! + nd2["y"]!
+            return result
+        default:
+            return nil
+        }
+    }
+    return nil
+}
+
+func subPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any]? {
+    let cases = dictCheck(d1)
+    if (dictCheck(d1) == dictCheck(d2) && validPtTest(d1, d2)) {
+        switch cases {
+        case 0:
+            var result: [String: Int] = [:]
+            let nd1 = d1 as! [String: Int]
+            let nd2 = d2 as! [String: Int]
+            result["x"] = nd1["x"]! - nd2["x"]!
+            result["y"] = nd1["y"]! - nd2["y"]!
+            return result
+        case 1:
+            var result: [String: Double] = [:]
+            let nd1 = d1 as! [String: Double]
+            let nd2 = d2 as! [String: Double]
+            result["x"] = nd1["x"]! - nd2["x"]!
+            result["y"] = nd1["y"]! - nd2["y"]!
+            return result
+        default:
+            return nil
+        }
+    }
+    return nil
+}
+
