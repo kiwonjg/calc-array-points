@@ -114,7 +114,7 @@ func validPtTest(_ d1: [String: Any]?, _ d2: [String: Any]?) -> Bool{
     return true
 }
 
-func addPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any]? {
+func addDPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any] {
     let cases = dictCheck(d1)
     if (dictCheck(d1) == dictCheck(d2) && validPtTest(d1, d2)) {
         switch cases {
@@ -133,13 +133,13 @@ func addPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any]? {
             result["y"] = nd1["y"]! + nd2["y"]!
             return result
         default:
-            return nil
+            return [:]
         }
     }
-    return nil
+    return [:]
 }
 
-func subPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any]? {
+func subDPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any] {
     let cases = dictCheck(d1)
     if (dictCheck(d1) == dictCheck(d2) && validPtTest(d1, d2)) {
         switch cases {
@@ -158,9 +158,8 @@ func subPoints(_ d1: [String: Any], _ d2: [String: Any]) -> [String: Any]? {
             result["y"] = nd1["y"]! - nd2["y"]!
             return result
         default:
-            return nil
+            return [:]
         }
     }
-    return nil
+    return [:]
 }
-
